@@ -152,7 +152,7 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li>
+                    {{-- <li>
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
@@ -169,24 +169,30 @@
                     </li>
                     <li>
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                    </li>
+                    </li> --}}
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Category <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="/categories/create">Create Category</a>
                             </li>
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="/categories">View All Category</a>
                             </li>
                         </ul>
                     </li>
-                    <li >
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                    </li>
                     <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#dem"><i class="fa fa-fw fa-bar-chart-o"></i> Post <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="dem" class="collapse">
+                            <li>
+                                <a href="/posts/create">Create Post</a>
+                            </li>
+                            <li>
+                                <a href="/posts">View All Post</a>
+                            </li>
+                        </ul>
                     </li>
+                  
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

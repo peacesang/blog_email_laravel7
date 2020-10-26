@@ -18,4 +18,13 @@ Route::get('/', function () {
 });
 
 
-Route::resource('categories', 'CategoryController');
+//Route::resource('categories', 'CategoryController');
+
+//resource binding
+Route::resources([
+    'categories' => 'CategoryController',
+    'posts' => 'PostController',
+]);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

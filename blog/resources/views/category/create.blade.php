@@ -29,9 +29,9 @@
                 <form action="/categories" method="POST">
                     <div class="form-group row">
                         <label for="categoryname" class="col-sm-2 col-form-label">Category name</label>
-                        <div class="col-sm-10">
-                        <input type="text" name="name"  >
-                        </div>
+                       
+                        <input type="text" name="name" class="form-control" >
+                        
                     </div>
 
                     <button type="submit" class="btn btn-primary">Add</button>
