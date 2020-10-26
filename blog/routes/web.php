@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontendController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin/index');
-});
+// Route::get('/', function () {
+//     return view('frontend/index');
+// });
 
 
 //Route::resource('categories', 'CategoryController');
@@ -28,3 +30,12 @@ Route::resources([
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//frontend controller
+Route::get('/','FrontendController@index');
+Route::get('/frontend','FrontendController@index');
+Route::get('/frontend/{id}','FrontendController@show');
+Route::get('/frontend/categoryposts/{id}','FrontendController@showcategoryposts');
+Route::post('/frontend/getsearch','FrontendController@getsearch');
+
