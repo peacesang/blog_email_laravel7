@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
-use auth;
+use App\User;
+use Hash;
+use Auth;
+use App\Rules\MatchOldPassword;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
     public function __construct()
     {
@@ -21,8 +23,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories=Category::all();
-        return view('category.index')->with('categories',$categories);
+        return view('admin.index');
     }
 
     /**
@@ -33,7 +34,6 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('category.create');
     }
 
     /**
@@ -45,19 +45,6 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request,[
-            'name'=>'required|max:20|min:3'            
-        ]);
-
-        $category= new Category;
-        $category->name=$request->name;
-        $category->save();
-        
-
-        return redirect('/categories/create')->with('success','category successfully added');
-
-
-
     }
 
     /**
@@ -80,8 +67,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         //
-        $category=Category::find($id);
-        return view('category.edit')->with('category',$category);
+        $user=User::find($id);
+        return view('auth.change_password')->with('user',$user);
     }
 
     /**
@@ -94,20 +81,39 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
-       
-
         $this->validate($request,[
-            'name'=>'required|max:20|min:3'            
-        ]);
+            'current_password' => ['required',new MatchOldPassword],
 
-        $category=Category::find($id);
+            'new_password' => ['required'],
+
+            'new_confirm_password' => ['same:new_password'],            
+        ]);
+        $user=User::find($id);
+        
+        $user->update(['password'=> Hash::make($request->new_password)]);
+        return redirect('/users/'.Auth::user()->id.'/edit')->with('success','password successfully changed');
+        
+        // if(Hash::check($requestData->password, $current_password))
+        // {
+        //     $user->fill([
+        //         'new_password'=>Hash::make($request->new_password)
+        //         ])->save();
+        //         return redirect('/users/'.Auth::user()->id.'/edit')->with('success','password successfully changed');
+        // }
+        // else
+        // {
+        //     return redirect('/users/'.Auth::user()->id.'/edit')->with('error','make sure your current password is correct');
+        // }
+      
+
+        // $user=User::find($id);
 
        
-        $category->name=$request->name;
-        $category->save();
+        // $user->password=$request->password;
+        // $user->save();
         
 
-        return redirect('/categories')->with('success','category successfully updated');
+        
     }
 
     /**
@@ -119,9 +125,5 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
-        $category=Category::find($id);
-
-        $category->delete();
-        return redirect('/categories')->with('success','sucessfully deleted');
     }
 }

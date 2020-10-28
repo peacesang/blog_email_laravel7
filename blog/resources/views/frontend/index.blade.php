@@ -1,5 +1,7 @@
 
 @extends('frontend.main')
+
+
 @section('content')
     
 @foreach($posts as $post)

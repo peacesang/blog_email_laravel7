@@ -131,7 +131,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->name }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -140,15 +140,30 @@
                             <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <a href="/users/{{Auth::user()->id}}/edit"><i class="fa fa-fw fa-gear"></i> Change password</a>
                         </li>
+                        @if(Auth::user()->admin==1)
+                        <li>
+                        <a href="/users"><i class="fa fa-fw fa-gear"></i> Admin</a>
+                        </li>
+                        @endif
+                        
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                     <button type="submit" class="btn btn-default ">   <i class="fa fa-fw fa-power-off"></i> Log Out</button>
+                                    </form>
+                           
                         </li>
                     </ul>
                 </li>
+
+              
+                
             </ul>
+
+            
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
